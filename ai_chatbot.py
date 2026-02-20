@@ -3,9 +3,21 @@
 # open ai api 는 유료만 가능하여.
 # 부득이. google ai studio 의 genai api 사용
 
+import os
+from dotenv import load_dotenv
+import streamlit as st
+
+load_dotenv()
+
+if "GEMINI_API_KEY" in st.secrets:
+    api_key = st.secrets["GEMINI_API_KEY"]
+else:
+    api_key = os.getenv("GEMINI_API_KEY")
+
 #1. GEN AI 응답을 위한 라이브러리 사용 및 생성AI객체 생성 -------------------
 from google import genai
-client= genai.Client(api_key='AIzaSyDoOloJkE0woHr4aMt0qzs1ty0SEg9X0bs')
+#client= genai.Client(api_key='AIzaSyDoOloJkE0woHr4aMt0qzs1ty0SEg9X0bs')
+client= genai.Client(api_key=api_key)
 
 # 응답 제어를 위한 하이퍼파라미터 설정.
 from google.genai import types
